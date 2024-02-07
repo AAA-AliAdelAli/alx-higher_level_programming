@@ -1,32 +1,38 @@
-
-dule that defines the class Student
+#!/usr/bin/python3
+"""Module 10-student
+Creates a student file
 """
 
 
 class Student:
-        """ Class to create student instances """
+    """Class that defines a student
+    Public attributes:
+        - first_name
+        - last_name
+        - age
+    Public method to_json()
+    """
 
-            def __init__(self, first_name, last_name, age):
-                    """ Special method to initialize """
-                            self.first_name = first_name
-                                    self.last_name = last_name
-                                            self.age = age
+    def __init__(self, first_name, last_name, age):
+        """Initializes the student instance"""
 
-                                                def to_json(self, attrs=None):
-                                                        """ Method that returns directory description """
-                                                                obj = self.__dict__.copy()
-                                                                        if type(attrs) is list:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-                                                                                    for item in attrs:
-                                                                                                    if type(item) is not str:
-                                                                                                                        return obj
+    def to_json(self, attrs=None):
+        """Retrieves a dictionary representation of a student instance
 
-                                                                                                                                    d_list = {}
+        Args:
+            - attrs: list of attributes
 
-                                                                                                                                                for iatr in range(len(attrs)):
-                                                                                                                                                                for satr in obj:
-                                                                                                                                                                                    if attrs[iatr] == satr:
-                                                                                                                                                                                                            d_list[satr] = obj[satr]
-                                                                                                                                                                                                                        return d_list
+        Returns: the dict representation of the instance
+        """
 
-                                                                                                                                                                                                                                return obj
+        my_dict = dict()
+        if type(attrs) is list and all(type(x) is str for x in attrs):
+            for x in attrs:
+                if x in self.__dict__:
+                    my_dict.upate({x: self.__dict__[x]})
+            return my_dict
+        return self.__dict__.copy()

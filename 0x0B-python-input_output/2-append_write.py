@@ -1,19 +1,17 @@
-
-dule that contains a function that appends to a text file
+#!/usr/bin/python3
+"""Module 2-append_write
+Appends a string at the end of a text file
 """
 
 
 def append_write(filename="", text=""):
-        """ Function that appends to a text file
+    """Appends text to filename
 
-            Args:
-                        filename: filename
-                                text: text to write
+    Args:
+        - filename: name of the file
+        - text: text to append
+    Returns: number of characters added
+    """
 
-                                    Raises
-                                            Exception: when the file can be opened
-
-                                                """
-
-                                                    with open(filename, 'a', encoding="utf-8") as f:
-                                                            return f.write(text)
+    with open(filename, 'a+') as f:
+        return f.write(text)

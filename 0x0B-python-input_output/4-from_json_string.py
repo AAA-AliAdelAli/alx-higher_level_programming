@@ -1,18 +1,18 @@
-
-dule that contains a function that returns an object by
-a JSON representation
+#!/usr/bin/python3
+"""Module 4-from_json_string
+Returns an object represented by a JSON string
 """
+
+
 import json
 
 
 def from_json_string(my_str):
-        """ Function that returns an object by a JSON representation
+    """Returns the object represented by my_str
 
-            Args:
-                        my_str: JSON representation
+    Args:
+        - my_str: JSON string representation
+    Returns: corresponding object
+    """
 
-                            Raises:
-                                        Exception: when the string can't be decoded
-
-                                            """
-                                                return json.loads(my_str)
+    return json.loads(my_str)

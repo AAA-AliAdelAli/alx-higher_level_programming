@@ -1,37 +1,48 @@
-
-dule that defines the class Student
+#!/usr/bin/python3
+"""
+Module 11-student
+Creates a student class
 """
 
 
 class Student:
-        """ Class to create student instances """
+    """Class that defines a student.
+    Public attributes:
+        - first_name
+        - last_name
+        - age
+    Public method to_json().
+    Public method reload_from_json().
+    """
 
-            def __init__(self, first_name, last_name, age):
-                    """ Special method to initialize """
-                            self.first_name = first_name
-                                    self.last_name = last_name
-                                            self.age = age
+    def __init__(self, first_name, last_name, age):
+        """Initializes the Student instance."""
 
-                                                def to_json(self, attrs=None):
-                                                        """ Method that returns directory description """
-                                                                obj = self.__dict__.copy()
-                                                                        if type(attrs) is list:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-                                                                                    for item in attrs:
-                                                                                                    if type(item) is not str:
-                                                                                                                        return obj
+    def to_json(self, attrs=None):
+        """Retrieves a dictionary representation
+        of a Student instance.
+        Args:
+            - attrs: list of attributes
+        Returns: the dict representation of the instance.
+        """
 
-                                                                                                                                    d_list = {}
+        my_dict = dict()
+        if attrs and all(isinstance(x, str) for x in attrs):
+            for x in attrs:
+                if x in self.__dict__:
+                    my_dict.update({x: self.__dict__[x]})
+            return my_dict
+        return self.__dict__
 
-                                                                                                                                                for iatr in range(len(attrs)):
-                                                                                                                                                                for satr in obj:
-                                                                                                                                                                                    if attrs[iatr] == satr:
-                                                                                                                                                                                                            d_list[satr] = obj[satr]
-                                                                                                                                                                                                                        return d_list
+    def reload_from_json(self, json):
+        """Replaces all attributes of the Student instance.
+        Args:
+            - json: dictionnary of attributes
+        """
 
-                                                                                                                                                                                                                                return obj
-
-                                                                                                                                                                                                                                    def reload_from_json(self, json):
-                                                                                                                                                                                                                                            """ Replaces all attributes of the Student instance """
-                                                                                                                                                                                                                                                    for atr in json:
-                                                                                                                                                                                                                                                                self.__dict__[atr] = json[atr]
+        for x in json:
+            self.__dict__.update({x: json[x]})
